@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueApollo from "vue-apollo";
+import myApolloClient from "@/apolloClient.js";
 import {
   createApolloClient,
   restartWebsockets,
@@ -12,8 +13,7 @@ Vue.use(VueApollo);
 const AUTH_TOKEN = "apollo-token";
 
 // Http endpoint
-const httpEndpoint =
-  process.env.VUE_APP_GRAPHQL_HTTP || "https://gql.desq.info/graphql";
+const httpEndpoint = process.env.VUE_APP_GRAPHQL_ENDPOINT_HTTP;
 
 // Config
 const defaultOptions = {
@@ -61,7 +61,7 @@ export function createProvider(options = {}) {
 
   // Create vue apollo provider
   const apolloProvider = new VueApollo({
-    defaultClient: apolloClient,
+    defaultClient: myApolloClient,
     defaultOptions: {
       $query: {
         // fetchPolicy: 'cache-and-network',

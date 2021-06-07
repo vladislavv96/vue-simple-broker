@@ -1,5 +1,7 @@
 mutation auth($login: String!, $password: String!) {
   authenticate(login: $login, password: $password) {
     accessToken
+    refreshToken
+    login
   }
 }

@@ -31,3 +31,8 @@ export const beforeEach = (to, from, next) => {
   // otherwise move forward
   next();
 };
+
+export const redirectIfAuthenticated = (redirect = "/") => (to, from, next) => {
+  if (isAuthenticated()) return next(redirect);
+  next();
+};
