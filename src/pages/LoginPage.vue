@@ -3,7 +3,7 @@
     <v-container>
       <v-row>
         <v-col cols="2" offset="5">
-          <form>
+          <form @submit.prevent="submit">
             <v-text-field
               v-model="login"
               label="Login"
@@ -23,7 +23,7 @@
               @blur="$v.password.$touch()"
               required
             ></v-text-field>
-            <v-btn @click="submit">Submit</v-btn>
+            <v-btn type="submit">Submit</v-btn>
           </form>
         </v-col>
       </v-row>
