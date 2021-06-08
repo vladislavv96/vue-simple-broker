@@ -1,32 +1,32 @@
 const meta = {
-  login: {
-    section: "login",
-    layout: "LoginLayout",
+  public: {
+    section: 'public',
+    layout: 'LoginLayout',
   },
   account: {
-    section: "account",
-    layout: "AccountLayout",
+    section: 'account',
+    layout: 'AccountLayout',
     auth: true,
   },
-};
+}
 
 const routes = [
   {
-    name: "login",
-    path: "/",
-    component: () => import("@/pages/LoginPage"),
+    name: 'login',
+    path: '/',
+    component: () => import('@/pages/public/login-page'),
     meta: {
-      ...meta.login,
+      ...meta.public,
     },
   },
   {
-    name: "account",
-    path: "/account",
-    component: () => import("@/pages/AccountPage"),
+    name: 'account',
+    path: '/account',
+    component: () => import('@/pages/account/account-page'),
     meta: {
       ...meta.account,
     },
   },
-];
+]
 
-export default routes;
+export default routes

@@ -11,18 +11,18 @@
 </template>
 
 <script>
-import DashboardCard from "../components/DashboardCard.vue";
-import { logOut } from "@/services/auth/";
+import DashboardCard from '../../../components/dashboard-card'
+import { logOut } from '@/services/auth/'
 export default {
   components: { DashboardCard },
-  name: "AccountPage",
+  name: 'AccountPage',
   methods: {
     logout() {
-      logOut(false);
-      this.$router.push({ name: "login" });
+      logOut(false)
+      this.$router.push({ name: 'login' })
     },
   },
-};
+}
 </script>
 
 <style scoped>
