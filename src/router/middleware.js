@@ -21,10 +21,7 @@ export const beforeEach = (to, from, next) => {
     console.log(redirectAfterLoginTo);
     if (redirectAfterLoginTo) {
       console.log(route);
-      route.query = {
-        ...route.query,
-        redirect: redirectAfterLoginTo,
-      };
+      route.query.redirect = redirectAfterLoginTo;
     }
     return next(route);
   }

@@ -45,7 +45,7 @@ export default {
     },
   },
   mounted() {
-    if (isAuthenticated) {
+    if (isAuthenticated()) {
       this.$router.push({ name: "account" });
     }
   },
