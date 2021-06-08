@@ -20,7 +20,7 @@
         @blur="$v.password.$touch()"
         required
       ></v-text-field>
-      <v-btn type="submit">Submit</v-btn>
+      <v-btn type="submit" :loading="isPending">Submit</v-btn>
     </form>
   </div>
 </template>
@@ -32,7 +32,21 @@ import { required, minLength } from "vuelidate/lib/validators";
 
 export default {
   mixins: [validationMixin],
-  name: "LoginPage",
+  name: "LoginForm",
+  props: {
+    isPending: {
+      default: false,
+      type: Boolean,
+    },
+    isResolved: {
+      default: true,
+      type: Boolean,
+    },
+    isRejected: {
+      default: false,
+      type: Boolean,
+    },
+  },
   data() {
     return {
       login: "admin@admin.com",
@@ -79,6 +93,9 @@ export default {
       //   errors.push("Password must be at least 8 characters long");
       return errors;
     },
+  },
+  mounted() {
+    console.log(this.isPending);
   },
 };
 </script>

@@ -3,7 +3,10 @@
     <v-container>
       <v-row>
         <v-col cols="2" offset="5">
-          <login-form @handle="auth" />
+          <login-form
+            @handle="$async.authHandler.$perform"
+            :isPending="$async.authHandler.$pending || undefined"
+          />
         </v-col>
       </v-row>
     </v-container>
@@ -21,26 +24,33 @@ export default {
   name: "LoginPage",
   methods: {
     auth({ username, password }) {
-      this.$apollo
+      return this.$apollo
         .mutate({
           mutation: require("@/graphql/authenticate.gql"),
           variables: { login: username, password },
         })
-        .then((r) => {
-          login(r.data.authenticate);
-          if (this.$route.query.redirect) {
-            this.$router.push(this.$route.query.redirect);
-          } else {
-            this.$router.push({ name: "account" });
+        .then(
+          (r) => {
+            login(r.data.authenticate);
+            if (this.$route.query.redirect) {
+              this.$router.push(this.$route.query.redirect);
+            } else {
+              this.$router.push({ name: "account" });
+            }
+          },
+          () => {
+            console.log("Login or pass invalid");
           }
-        })
-        .catch(() => console.log("Login or password invalid"));
+        );
     },
   },
   mounted() {
     if (isAuthenticated) {
       this.$router.push({ name: "account" });
     }
+  },
+  asyncOperations: {
+    authHandler: "auth",
   },
 };
 </script>
